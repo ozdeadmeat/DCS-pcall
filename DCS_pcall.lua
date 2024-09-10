@@ -5,20 +5,20 @@ DCS = {
     setErrorMessageBoxEnabled = false,
 
     -- TODO Need log function
-    log = function(str)
+    log = function(_message)
     end,
 
     -- TODO Need tableToString function
-    tableToString = function(tbl)
+    tableToString = function(_table)
     end,
 
     Airbase = {}, -- TODO Airbase not started
 
     atmosphere = {}, -- TODO atmosphere not started
     Controller = {
-        setTask = function(_ctrllr, _tskTbl)
+        setTask = function(_controller, _task)
             local _status, _ = pcall(function()
-                _ctrllr:setTask(_tskTbl);
+                _controller:setTask(_task);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -27,9 +27,9 @@ DCS = {
             end
         end,
 
-        resetTask = function(_ctrllr)
+        resetTask = function(_controller)
             local _status, _ = pcall(function()
-                _ctrllr:resetTask();
+                _controller:resetTask();
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -38,9 +38,9 @@ DCS = {
             end
         end,
 
-        pushTask = function(_ctrllr, _tskTbl)
+        pushTask = function(_controller, _tskTbl)
             local _status, _ = pcall(function()
-                _ctrllr:pushTask(_tskTbl);
+                _controller:pushTask(_tskTbl);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -49,9 +49,9 @@ DCS = {
             end
         end,
 
-        popTask = function(_ctrllr)
+        popTask = function(_controller)
             local _status, _ = pcall(function()
-                _ctrllr:popTask();
+                _controller:popTask();
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -60,9 +60,9 @@ DCS = {
             end
         end,
 
-        hasTask = function(_ctrllr)
+        hasTask = function(_controller)
             local _status, _ = pcall(function()
-                _ctrllr:hasTask();
+                _controller:hasTask();
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -71,9 +71,9 @@ DCS = {
             end
         end,
 
-        setCommand = function(_ctrllr, _cmdTbl)
+        setCommand = function(_controller, _command)
             local _status, _ = pcall(function()
-                _ctrllr:setCommand(_cmdTbl);
+                _controller:setCommand(_command);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -82,9 +82,9 @@ DCS = {
             end
         end,
 
-        setOption = function(_ctrllr, _optID, _optVal)
+        setOption = function(_controller, _optionId, _optionValue)
             local _status, _ = pcall(function()
-                _ctrllr:setOption(_optID, _optVal);
+                _controller:setOption(_optionId, _optionValue);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -93,9 +93,9 @@ DCS = {
             end
         end,
 
-        setOnOff = function(_ctrllr, _onOff)
+        setOnOff = function(_controller, _value)
             local _status, _ = pcall(function()
-                _ctrllr:setOnOff(_onOff);
+                _controller:setOnOff(_value);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -104,9 +104,9 @@ DCS = {
             end
         end,
 
-        setAltitude = function(_ctrllr, _keep, _altType)
+        setAltitude = function(_controller, _keep, _altType)
             local _status, _ = pcall(function()
-                _ctrllr:setAltitude(_keep, _altType);
+                _controller:setAltitude(_keep, _altType);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -115,9 +115,9 @@ DCS = {
             end
         end,
 
-        setSpeed = function(_ctrllr, _spd, _keep)
+        setSpeed = function(_controller, _speed, _keep)
             local _status, _ = pcall(function()
-                _ctrllr:setSpeed(_spd, _keep);
+                _controller:setSpeed(_speed, _keep);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -126,9 +126,9 @@ DCS = {
             end
         end,
 
-        knowTarget = function(_ctrllr, _tgt, _typ, _dist)
+        knowTarget = function(_controller, _target, _type, _distance)
             local _status, _ = pcall(function()
-                _ctrllr:knowTarget(_tgt, _typ, _dist);
+                _controller:knowTarget(_target, _type, _distance);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -137,11 +137,11 @@ DCS = {
             end
         end,
 
-        isTargetDetected = function(_ctrllr, _tgt, ...)
+        isTargetDetected = function(_controller, _target, ...)
             -- TODO Need help with this one
-            local _argVar = { ... }
+            local _vararg = { ... }
             local _status, _ = pcall(function()
-                _ctrllr:isTargetDetected(_tgt, _argVar);
+                _controller:isTargetDetected(_target, _vararg);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -150,11 +150,11 @@ DCS = {
             end
         end,
 
-        getDetectedTargets = function(_ctrllr, ...)
+        getDetectedTargets = function(_controller, ...)
             -- TODO Need help with this one
-            local _argVar = { ... }
+            local _vararg = { ... }
             local _status, _ = pcall(function()
-                _ctrllr:getDetectedTargets(_argVar);
+                _controller:getDetectedTargets(_vararg);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -233,9 +233,9 @@ DCS = {
             end
         end,
 
-        getUnit = function(_group, indx)
+        getUnit = function(_group, _unitIndex)
             local _status, _ = pcall(function()
-                _group:getUnit(indx);
+                _group:getUnit(_unitIndex);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -309,10 +309,10 @@ DCS = {
     ScenaryObject = {}, -- TODO ScenaryObject not started
 
     Spot = {
-        createLaser = function(_obj, _lvec3, _point, _laseCode)
+        createLaser = function(_source, _localRef, _point, _laseCode)
             -- TODO Need help with this one
             local _status, _ = pcall(function()
-                Spot.createLaser(_obj, _lvec3, _point, _laseCode);
+                Spot.createLaser(_source, _localRef, _point, _laseCode);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -321,10 +321,10 @@ DCS = {
             end
         end,
 
-        createInfraRed = function(_obj, _lvec3, _point)
+        createInfraRed = function(_source, _localRef, _point)
             -- TODO Need help with this one
             local _status, _ = pcall(function()
-                Spot.createInfraRed(_obj, _lvec3, _point);
+                Spot.createInfraRed(_source, _localRef, _point);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -392,7 +392,7 @@ DCS = {
         setCode = function(_spot, _code)
             -- TODO Need help with this one
             local _status, _ = pcall(function()
-                _spot:setCode(_code);
+                _spot:setCode(_code); -- TODO: Hoggit says this should be `Spot.setCode(_spot, _code)` ?
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -536,9 +536,9 @@ DCS = {
             end
         end,
 
-        hasSensors = function(_unit, _sensorType, _sensorSubCat)
+        hasSensors = function(_unit, _sensorType, _subcategory)
             local _status, _ = pcall(function()
-                _unit:hasSensors(_sensorType, _sensorSubCat);
+                _unit:hasSensors(_sensorType, _subcategory);
             end)
             if not _status then
                 -- TODO Need logging added here
@@ -560,7 +560,7 @@ DCS = {
 
         getDrawArgumentValue = function(_unit, _drawArgValue)
             local _status, _ = pcall(function()
-                _unit:getDrawArgumentValue(_drawArgValue);
+                _unit:getDrawArgumentValue(_drawArgValue); -- TODO: Unit.getDrawArgumentValue(_unit, _arg)
             end)
             if not _status then
                 -- TODO Need logging added here
