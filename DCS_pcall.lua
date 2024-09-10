@@ -21,10 +21,9 @@ DCS = {
                 _controller:setTask(_task);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         resetTask = function(_controller)
@@ -32,21 +31,19 @@ DCS = {
                 _controller:resetTask();
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
-        pushTask = function(_controller, _tskTbl)
+        pushTask = function(_controller, _task)
             local _status, _ = pcall(function()
-                _controller:pushTask(_tskTbl);
+                _controller:pushTask(_task);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         popTask = function(_controller)
@@ -54,20 +51,19 @@ DCS = {
                 _controller:popTask();
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         hasTask = function(_controller)
-            local _status, _ = pcall(function()
-                _controller:hasTask();
+            local _status, _response = pcall(function()
+                return _controller:hasTask();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
@@ -76,10 +72,9 @@ DCS = {
                 _controller:setCommand(_command);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         setOption = function(_controller, _optionId, _optionValue)
@@ -87,10 +82,9 @@ DCS = {
                 _controller:setOption(_optionId, _optionValue);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         setOnOff = function(_controller, _value)
@@ -98,21 +92,19 @@ DCS = {
                 _controller:setOnOff(_value);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
-        setAltitude = function(_controller, _keep, _altType)
+        setAltitude = function(_controller, _altitude, _keep, _altType)
             local _status, _ = pcall(function()
-                _controller:setAltitude(_keep, _altType);
+                _controller:setAltitude(_altitude, _keep, _altType);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         setSpeed = function(_controller, _speed, _keep)
@@ -120,46 +112,44 @@ DCS = {
                 _controller:setSpeed(_speed, _keep);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
-        knowTarget = function(_controller, _target, _type, _distance)
+        knowTarget = function(_controller, _object, _type, _distance)
             local _status, _ = pcall(function()
-                _controller:knowTarget(_target, _type, _distance);
+                _controller:knowTarget(_object, _type, _distance);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         isTargetDetected = function(_controller, _target, ...)
             -- TODO Need help with this one
-            local _vararg = { ... }
-            local _status, _ = pcall(function()
-                _controller:isTargetDetected(_target, _vararg);
+            local _vararg = { ... };
+            local _status, _response = pcall(function()
+                return _controller:isTargetDetected(_target, _vararg);
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getDetectedTargets = function(_controller, ...)
             -- TODO Need help with this one
-            local _vararg = { ... }
-            local _status, _ = pcall(function()
-                _controller:getDetectedTargets(_vararg);
+            local _vararg = { ... };
+            local _status, _response = pcall(function()
+                return  _controller:getDetectedTargets(_vararg);
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end
     },
@@ -168,13 +158,13 @@ DCS = {
 
     Group = {
         isExist = function(_group)
-            local _status, _ = pcall(function()
-                _group:isExist();
+            local _status, _response = pcall(function()
+                return _group:isExist();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
@@ -183,10 +173,9 @@ DCS = {
                 _group:activate();
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         destroy = function(_group)
@@ -194,10 +183,9 @@ DCS = {
                 _group:destroy();
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         getCategory = function(_group)
@@ -205,86 +193,85 @@ DCS = {
                 _group:getCategory();
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         getName = function(_group)
-            local _status, _ = pcall(function()
-                _group:getName();
+            local _status, _response = pcall(function()
+                return _group:getName();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getID = function(_group)
-            local _status, _ = pcall(function()
-                _group:getID();
+            local _status, _response = pcall(function()
+                return _group:getID();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getUnit = function(_group, _unitIndex)
-            local _status, _ = pcall(function()
-                _group:getUnit(_unitIndex);
+            local _status, _response = pcall(function()
+                return _group:getUnit(_unitIndex);
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getUnits = function(_group)
-            local _status, _ = pcall(function()
-                _group:getUnits();
+            local _status, _response = pcall(function()
+                return _group:getUnits();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getSize = function(_group)
-            local _status, _ = pcall(function()
-                _group:getSize();
+            local _status, _response = pcall(function()
+                return _group:getSize();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getInitialSize = function(_group)
-            local _status, _ = pcall(function()
-                _group:getInitialSize();
+            local _status, _response = pcall(function()
+                return _group:getInitialSize();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getController = function(_group)
-            local _status, _ = pcall(function()
-                _group:getController();
+            local _status, _response = pcall(function()
+                return _group:getController();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
@@ -293,10 +280,9 @@ DCS = {
                 _group:enableEmission();
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end
     },
 
@@ -311,25 +297,25 @@ DCS = {
     Spot = {
         createLaser = function(_source, _localRef, _point, _laseCode)
             -- TODO Need help with this one
-            local _status, _ = pcall(function()
-                Spot.createLaser(_source, _localRef, _point, _laseCode);
+            local _status, _response = pcall(function()
+                return Spot.createLaser(_source, _localRef, _point, _laseCode);
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         createInfraRed = function(_source, _localRef, _point)
             -- TODO Need help with this one
-            local _status, _ = pcall(function()
-                Spot.createInfraRed(_source, _localRef, _point);
+            local _status, _response = pcall(function()
+                return Spot.createInfraRed(_source, _localRef, _point);
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
@@ -339,244 +325,246 @@ DCS = {
                 _spot:destroy();
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         getCategory = function(_spot)
             -- TODO Need help with this one
-            local _status, _ = pcall(function()
-                _spot:getCategory();
+            local _status, _response = pcall(function()
+                return _spot:getCategory();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
+
         getPoint = function(_spot)
             -- TODO Need help with this one
-            local _status, _ = pcall(function()
-                _spot:getPoint();
+            local _status, _response = pcall(function()
+                return _spot:getPoint();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
+
         setPoint = function(_spot, _vec3)
             -- TODO Need help with this one
             local _status, _ = pcall(function()
                 _spot:setPoint(_vec3);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
+
         getCode = function(_spot)
             -- TODO Need help with this one
-            local _status, _ = pcall(function()
-                _spot:getCode();
+            local _status, _response = pcall(function()
+                return _spot:getCode();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
+
         setCode = function(_spot, _code)
             -- TODO Need help with this one
             local _status, _ = pcall(function()
-                _spot:setCode(_code); -- TODO: Hoggit says this should be `Spot.setCode(_spot, _code)` ?
+                _spot:setCode(_code);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end
     },
+
     trigger = {}, -- TODO trigger not started
 
     Unit = {
         isActive = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:isActive();
+            local _status, _response = pcall(function()
+                return _unit:isActive();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getPlayerName = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getPlayerName();
+            local _status, _response = pcall(function()
+                return _unit:getPlayerName();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getID = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getID();
+            local _status, _response = pcall(function()
+                return _unit:getID();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getNumber = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getNumber();
+            local _status, _response = pcall(function()
+                return _unit:getNumber();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getCategoryEx = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getCategoryEx();
+            local _status, _response = pcall(function()
+                return _unit:getCategoryEx();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getObjectID = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getObjectID();
+            local _status, _response = pcall(function()
+                return _unit:getObjectID();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getController = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getController();
+            local _status, _response = pcall(function()
+                return _unit:getController();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getLife = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getLife();
+            local _status, _response = pcall(function()
+                return _unit:getLife();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getLife0 = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getLife0();
+            local _status, _response = pcall(function()
+                return _unit:getLife0();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getFuel = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getFuel();
+            local _status, _response = pcall(function()
+                return _unit:getFuel();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getAmmo = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getAmmo();
+            local _status, _response = pcall(function()
+                return _unit:getAmmo();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getSensors = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getSensors();
+            local _status, _response = pcall(function()
+                return _unit:getSensors();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         hasSensors = function(_unit, _sensorType, _subcategory)
-            local _status, _ = pcall(function()
-                _unit:hasSensors(_sensorType, _subcategory);
+            local _status, _response = pcall(function()
+                return _unit:hasSensors(_sensorType, _subcategory);
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getRadar = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getRadar();
+            local _status, _response = pcall(function()
+                return _unit:getRadar();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getDrawArgumentValue = function(_unit, _drawArgValue)
-            local _status, _ = pcall(function()
-                _unit:getDrawArgumentValue(_drawArgValue); -- TODO: Unit.getDrawArgumentValue(_unit, _arg)
+            local _status, _response = pcall(function()
+                return _unit:getDrawArgumentValue(_drawArgValue);
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
         getNearestCargos = function(_unit)
-            local _status, _ = pcall(function()
-                _unit:getNearestCargos();
+            local _status, _response = pcall(function()
+                return _unit:getNearestCargos();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end,
 
@@ -585,20 +573,19 @@ DCS = {
                 _unit:enableEmission(_onOff);
             end)
             if not _status then
-                -- TODO Need logging added here
-            else
                 -- TODO Need debug logging added here
             end
+            return nil;
         end,
 
         getDescentCapacity = function(_unit)
             local _status, _ = pcall(function()
-                _unit:getDescentCapacity();
+                return _unit:getDescentCapacity();
             end)
-            if not _status then
-                -- TODO Need logging added here
+            if _status then
+                return _response;
             else
-                -- TODO Need debug logging added here
+                -- TODO Need logging added here
             end
         end
     },
