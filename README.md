@@ -5,4 +5,4 @@ The aim for this project is to provide a pcall protected set of functions that m
 
 
 # Shout-Out
-Thanks to OfficialyInsane for helping me understand the importance of having a capability like this for the DCS community.
+Thanks to [OfficialyInsane](https://github.com/officialyinsane) for helping me understand the importance of having a capability like this for the DCS community.
