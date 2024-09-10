@@ -4,6 +4,11 @@ DCS = {
     DEBUG_TEXT_DELAY = 30,
     setErrorMessageBoxEnabled = false,
 
+    proxy = {
+        ["Controller"] = Controller,
+        ["Spot"] = Spot
+    },
+
     -- TODO Need log function
     log = function(_message)
     end,
@@ -15,6 +20,7 @@ DCS = {
     Airbase = {}, -- TODO Airbase not started
 
     atmosphere = {}, -- TODO atmosphere not started
+
     Controller = {
         setTask = function(_controller, _task)
             local _status, _ = pcall(function()
@@ -64,6 +70,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -128,28 +135,28 @@ DCS = {
         end,
 
         isTargetDetected = function(_controller, _target, ...)
-            -- TODO Need help with this one
             local _vararg = { ... };
             local _status, _response = pcall(function()
-                return _controller:isTargetDetected(_target, _vararg);
+                return DCS.proxy["Controller"].isTargetDetected(_controller, _target, _vararg);
             end)
             if _status then
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
         getDetectedTargets = function(_controller, ...)
-            -- TODO Need help with this one
             local _vararg = { ... };
             local _status, _response = pcall(function()
-                return  _controller:getDetectedTargets(_vararg);
+                return DCS.proxy["Controller"].getDetectedTargets(_controller, _vararg);
             end)
             if _status then
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end
     },
@@ -165,6 +172,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -217,6 +225,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -239,6 +248,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -261,6 +271,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -272,6 +283,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -296,31 +308,30 @@ DCS = {
 
     Spot = {
         createLaser = function(_source, _localRef, _point, _laseCode)
-            -- TODO Need help with this one
             local _status, _response = pcall(function()
-                return Spot.createLaser(_source, _localRef, _point, _laseCode);
+                return DCS.proxy["Spot"].createLaser(_source, _localRef, _point, _laseCode);
             end)
             if _status then
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
         createInfraRed = function(_source, _localRef, _point)
-            -- TODO Need help with this one
             local _status, _response = pcall(function()
-                return Spot.createInfraRed(_source, _localRef, _point);
+                return DCS.proxy["Spot"].createInfraRed(_source, _localRef, _point);
             end)
             if _status then
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
         destroy = function(_spot)
-            -- TODO Need help with this one
             local _status, _ = pcall(function()
                 _spot:destroy();
             end)
@@ -331,7 +342,6 @@ DCS = {
         end,
 
         getCategory = function(_spot)
-            -- TODO Need help with this one
             local _status, _response = pcall(function()
                 return _spot:getCategory();
             end)
@@ -339,11 +349,11 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
         getPoint = function(_spot)
-            -- TODO Need help with this one
             local _status, _response = pcall(function()
                 return _spot:getPoint();
             end)
@@ -351,11 +361,11 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
         setPoint = function(_spot, _vec3)
-            -- TODO Need help with this one
             local _status, _ = pcall(function()
                 _spot:setPoint(_vec3);
             end)
@@ -366,19 +376,18 @@ DCS = {
         end,
 
         getCode = function(_spot)
-            -- TODO Need help with this one
             local _status, _response = pcall(function()
-                return _spot:getCode();
+                return DCS.proxy["Spot"].getCode(_spot);
             end)
             if _status then
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
         setCode = function(_spot, _code)
-            -- TODO Need help with this one
             local _status, _ = pcall(function()
                 _spot:setCode(_code);
             end)
@@ -400,6 +409,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -411,6 +421,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -422,6 +433,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -433,6 +445,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -444,6 +457,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -455,6 +469,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -466,6 +481,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -477,6 +493,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -488,6 +505,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -499,6 +517,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -510,6 +529,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -521,6 +541,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -532,6 +553,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -543,6 +565,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -554,6 +577,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -565,6 +589,7 @@ DCS = {
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end,
 
@@ -579,13 +604,14 @@ DCS = {
         end,
 
         getDescentCapacity = function(_unit)
-            local _status, _ = pcall(function()
+            local _status, _response = pcall(function()
                 return _unit:getDescentCapacity();
             end)
             if _status then
                 return _response;
             else
                 -- TODO Need logging added here
+                return nil;
             end
         end
     },
@@ -593,3 +619,5 @@ DCS = {
     Warehouse = {}, -- TODO Warehouse not started
     world = {} -- TODO world not started
 }
+
+return true;
