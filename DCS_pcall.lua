@@ -1,7 +1,5 @@
 -- Original Idea from OfficialyInsane with some help from OzDeaDMeaT
 
-
-
 DCS = {
     DEBUG_TEXT_DELAY = 30,
     setErrorMessageBoxEnabled = false,
@@ -13,7 +11,9 @@ DCS = {
     -- TODO Need tableToString function
     tableToString = function(tbl)
     end,
+
     Airbase = {}, -- TODO Airbase not started
+
     atmosphere = {}, -- TODO atmosphere not started
         Controller = {
         setTask  = function(_ctrllr,_tskTbl)
@@ -26,6 +26,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         resetTask  = function(_ctrllr)
             local _status, _ = pcall(function()
             _ctrllr:resetTask();
@@ -36,6 +37,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         pushTask  = function(_ctrllr,_tskTbl)
             local _status, _ = pcall(function()
             _ctrllr:pushTask(_tskTbl);
@@ -46,6 +48,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         popTask  = function(_ctrllr)
             local _status, _ = pcall(function()
             _ctrllr:popTask();
@@ -56,6 +59,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         hasTask  = function(_ctrllr)
             local _status, _ = pcall(function()
             _ctrllr:hasTask();
@@ -66,6 +70,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         setCommand  = function(_ctrllr,_cmdTbl)
             local _status, _ = pcall(function()
             _ctrllr:setCommand(_cmdTbl);
@@ -76,6 +81,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         setOption  = function(_ctrllr,_optID,_optVal)
             local _status, _ = pcall(function()
             _ctrllr:setOption(_optID,_optVal);
@@ -86,6 +92,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         setOnOff  = function(_ctrllr,_onOff)
             local _status, _ = pcall(function()
             _ctrllr:setOnOff(_onOff);
@@ -96,6 +103,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         setAltitude  = function(_ctrllr,_keep,_altType)
             local _status, _ = pcall(function()
             _ctrllr:setAltitude(_keep,_altType);
@@ -106,6 +114,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         setSpeed  = function(_ctrllr,_spd,_keep)
             local _status, _ = pcall(function()
             _ctrllr:setSpeed(_spd,_keep);
@@ -116,6 +125,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         knowTarget  = function(_ctrllr,_tgt,_typ,_dist)
             local _status, _ = pcall(function()
             _ctrllr:knowTarget(_tgt,_typ,_dist);
@@ -126,6 +136,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         isTargetDetected  = function(_ctrllr,_tgt,...) -- TODO Need help with this one
             local _argVar = {...}
             local _status, _ = pcall(function()
@@ -137,6 +148,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+        
         getDetectedTargets  = function(_ctrllr,...) -- TODO Need help with this one
             local _argVar = {...}
             local _status, _ = pcall(function()
@@ -149,7 +161,9 @@ DCS = {
             end
         end
     },
+
     coord = {}, -- TODO coord not started
+
     Group = {
         isExist  = function(_group)
             local _status, _ = pcall(function()
@@ -161,6 +175,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         activate = function(_group)
             local _status, _ = pcall(function()
             _group:activate();
@@ -171,6 +186,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         destroy  = function(_group)
             local _status, _ = pcall(function()
             _group:destroy();
@@ -181,6 +197,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getCategory  = function(_group)
             local _status, _ = pcall(function()
             _group:getCategory();
@@ -191,6 +208,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getName  = function(_group)
             local _status, _ = pcall(function()
             _group:getName();
@@ -201,6 +219,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getID  = function(_group)
             local _status, _ = pcall(function()
             _group:getID();
@@ -211,6 +230,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getUnit  = function(_group,indx)
             local _status, _ = pcall(function()
             _group:getUnit(indx);
@@ -221,6 +241,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getUnits  = function(_group)
             local _status, _ = pcall(function()
             _group:getUnits();
@@ -231,6 +252,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getSize  = function(_group)
             local _status, _ = pcall(function()
             _group:getSize();
@@ -241,6 +263,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getInitialSize  = function(_group)
             local _status, _ = pcall(function()
             _group:getInitialSize();
@@ -251,6 +274,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getController  = function(_group)
             local _status, _ = pcall(function()
             _group:getController();
@@ -261,6 +285,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         enableEmission  = function(_group)
             local _status, _ = pcall(function()
             _group:enableEmission();
@@ -272,10 +297,15 @@ DCS = {
             end
         end
     },
+
     land = {}, -- TODO land not started
+
     missionCommands = {},  -- TODO missionCommands not started
+
     net = {}, -- TODO net not started
+
     ScenaryObject = {}, -- TODO ScenaryObject not started
+
     Spot = {
         createLaser  = function(_obj,_lvec3,_point,_laseCode) -- TODO Need help with this one
             local _status, _ = pcall(function()
@@ -287,6 +317,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         createInfraRed  = function(_obj,_lvec3,_point) -- TODO Need help with this one
             local _status, _ = pcall(function()
             Spot.createInfraRed(_obj,_lvec3,_point);
@@ -297,6 +328,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         destroy  = function(_spot) -- TODO Need help with this one
             local _status, _ = pcall(function()
             _spot:destroy();
@@ -307,6 +339,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getCategory  = function(_spot) -- TODO Need help with this one
             local _status, _ = pcall(function()
             _spot:getCategory();
@@ -359,6 +392,7 @@ DCS = {
         end
     },
     trigger = {}, -- TODO trigger not started
+
     Unit = {
         isActive  = function(_unit)
             local _status, _ = pcall(function()
@@ -370,6 +404,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getPlayerName  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getPlayerName();
@@ -380,6 +415,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getID  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getID();
@@ -390,6 +426,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getNumber  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getNumber();
@@ -400,6 +437,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getCategoryEx  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getCategoryEx();
@@ -410,6 +448,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getObjectID  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getObjectID();
@@ -420,6 +459,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getController  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getController();
@@ -430,6 +470,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getLife  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getLife();
@@ -440,6 +481,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getLife0  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getLife0();
@@ -450,6 +492,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getFuel  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getFuel();
@@ -460,6 +503,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getAmmo  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getAmmo();
@@ -470,6 +514,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getSensors  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getSensors();
@@ -480,6 +525,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         hasSensors  = function(_unit,_sensorType,_sensorSubCat)
             local _status, _ = pcall(function()
             _unit:hasSensors(_sensorType,_sensorSubCat);
@@ -490,6 +536,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getRadar  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getRadar();
@@ -500,6 +547,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getDrawArgumentValue  = function(_unit,_drawArgValue)
             local _status, _ = pcall(function()
             _unit:getDrawArgumentValue(_drawArgValue);
@@ -510,6 +558,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getNearestCargos  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getNearestCargos();
@@ -520,6 +569,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         enableEmission  = function(_unit,_onOff)
             local _status, _ = pcall(function()
             _unit:enableEmission(_onOff);
@@ -530,6 +580,7 @@ DCS = {
                 -- TODO Need debug logging added here
             end
         end,
+
         getDescentCapacity  = function(_unit)
             local _status, _ = pcall(function()
             _unit:getDescentCapacity();
@@ -541,6 +592,7 @@ DCS = {
             end
         end
     },
+
     Warehouse = {}, -- TODO Warehouse not started
     world = {} -- TODO world not started
 }
