@@ -6,11 +6,12 @@
 --   - _G.loadfile()
 --   - require()
 --   - import()
+--   - just load it via DO SCRIPT FILE trigger
 
 DCS = {
     DEBUG_TEXT_DELAY = 30,
 
-    log = LOGGER.log,
+    log = LOGGER,
     proxy = {
         ["Airbase"] = Airbase,
         ["atmosphere"] = atmosphere,
