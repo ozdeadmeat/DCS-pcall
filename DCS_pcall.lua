@@ -1,10 +1,16 @@
 ---@diagnostic disable: undefined-global
 -- Original Idea from OfficialyInsane with some help from OzDeaDMeaT
 
+-- TODO: Needs to import LOGGER to work.
+-- Options (all have drawbacks):
+--   - _G.loadfile()
+--   - require()
+--   - import()
+
 DCS = {
     DEBUG_TEXT_DELAY = 30,
-    setErrorMessageBoxEnabled = false,
 
+    log = LOGGER.log,
     proxy = {
         ["Airbase"] = Airbase,
         ["atmosphere"] = atmosphere,
@@ -25,10 +31,6 @@ DCS = {
         ["Warehouse"] = Warehouse,
         ["world"] = world,
     },
-
-    -- TODO Need log function
-    log = function(_message)
-    end,
 
     -- TODO Need tableToString function
     tableToString = function(_table)
