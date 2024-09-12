@@ -21,11 +21,11 @@ LOGGER = {
         _level = tonumber(_level);
 
         if type(_message) == "table" then
-            LOGGER.log(_level, MISC.tableToString(_message)); -- TODO: Needs the table2string function
+            LOGGER.log(_level, LOGGER.tableToString(_message));
         else
             if _level <= LOGGER.CURRENT_DEBUG_LEVEL then
                 if next(_varargs) ~= nil then
-                    _message = _message .. ": " .. MISC.tableToString(_varargs);
+                    _message = _message .. ": " .. LOGGER.tableToString(_varargs);
                 end
                 net.log(_message);
             end
@@ -37,9 +37,36 @@ LOGGER = {
         LOGGER.log(LOG_LEVEL.DEBUG, _message, _varargs);
     end,
 
+    error = function(_message, ...)
+        local _varargs = { ... } or {};
+        LOGGER.log(LOG_LEVEL.ERROR, _message, _varargs);
+    end,
+
     info = function(_message, ...)
         local _varargs = { ... } or {};
         LOGGER.log(LOG_LEVEL.INFO, _message, _varargs);
+    end,
+
+    tableToString = function(_table)
+        local _result = "{";
+
+        local function serialize(_object)
+            if type(_object) == "string" then
+                return string.format("%q", _object);
+            elseif type(_object) == "table" then
+                return tableToString(_object);
+            elseif type(_object) == "function" then
+                return "\"<function>\""; -- TODO: do we want to grab the arguments? Could be expensive to log!
+            else
+                return tostring(_object);
+            end
+        end
+        for _key, _value in pairs(_table) do
+           _result = _result .. string.format("[%s]=%s",
+                serialize(_key),
+                serialize(_value));
+        end
+        return _result .. "}";
     end,
 
     warn = function(_message, ...)
@@ -47,11 +74,6 @@ LOGGER = {
         LOGGER.log(LOG_LEVEL.WARN, _message, _varargs);
     end,
 
-
-    error = function(_message, ...)
-        local _varargs = { ... } or {};
-        LOGGER.log(LOG_LEVEL.ERROR, _message, _varargs);
-    end
 }
 
 return true;
