@@ -23,6 +23,10 @@ Debugger = {
     ---
     ---@param _function function
     getArgumentsForFunction = function(_function)
+        if type(_function) ~= "function" then
+            return {};
+        end
+
         local _arguments = {};
         local _originalDebugHook = debug.gethook();
         local _argumentCollectorHook = function( ... )
