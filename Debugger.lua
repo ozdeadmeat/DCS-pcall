@@ -4,15 +4,15 @@ DEBUG_FUNCTION_HOOK_SKIP_CALLSTACK_MEMBER_COUNT = 3;
 Debugger = {
 
     ---
-    --- This method will return a table containing the names of all the parameters of the function that is passed to it.
-    --- Since this includes a little black magic, lets break it down:
+    --- This method will return a table containing the names, types and values of all the parameters of the function that
+    --- is passed to it. Since this includes a little black magic, lets break it down:
     ---
     --- 1. Grab the current debug hook, so we can get back to safety later.
     --- 2. Create a new debug hook, which will:
     --- 2a. Detect if it is being executed inside a pcall or not, and if not, return immediately.
     --- 2b. Grab the local environment directly above the current call stack (contains the arguments as variables within a table).
     --- 2c. If we're at the end of the arguments, restore the original debug hook, throw an error, and return.
-    --- 2d. If we're still inside the hook (processing a table entry), add that table key to an up-value table.
+    --- 2d. If we're still inside the hook (processing a table entry), create a table entry and add it to our up-value table.
     --- 3. Register our new hook, so that the hook is called before each function called.
     --- 4. pcall() the argument that is passed in, expecting it to error (see 2c).
     --- 4a. If no error, there were no arguments, so we'll return an empty table.
@@ -37,13 +37,17 @@ Debugger = {
             end
 
             for _i = 1, math.huge do
-                local _name, _ = debug.getlocal(DEBUG_FUNCTION_HOOK_INTERESTING_CALLSTACK_INDEX, _i);
-                if _name == '(*temporary)' then
+                local _name, _value = debug.getlocal(DEBUG_FUNCTION_HOOK_INTERESTING_CALLSTACK_INDEX, _i);
+                if not _name or _name == '(*temporary)' then
                     debug.sethook(_originalDebugHook);
-                    error('');
+                    error("finished collecting arguments, this isn't actually an error");
                     return;
                 end
-                table.insert(_arguments, _name);
+                table.insert(_arguments, {
+                    name = _name,
+                    type = type(_value),
+                    value = _value
+                });
             end
         end
 
@@ -52,6 +56,4 @@ Debugger = {
         debug.sethook(_originalDebugHook);
         return _arguments;
     end
-
-
 }
