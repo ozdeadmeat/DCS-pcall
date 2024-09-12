@@ -47,7 +47,7 @@ Debugger = {
             end
         end
 
-        debug.sethook(_argumentCollectorHook(), "c");
+        debug.sethook(_argumentCollectorHook, "c");
         pcall(_function); -- guaranteed to fail if the function takes any arguments, but we don't care about the return values
         debug.sethook(_originalDebugHook);
         return _arguments;
