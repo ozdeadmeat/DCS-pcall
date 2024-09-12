@@ -209,7 +209,7 @@ DCS = {
     atmosphere = {
         getWind = function(_vec3)
             local _status, _response = pcall(function()
-                return atmosphere.getWind(_vec3);
+                return DCS.proxy["atmosphere"].getWind(_vec3);
             end)
             if _status then
                 return _response;
@@ -221,7 +221,7 @@ DCS = {
 
         getWindWithTurbulence = function(_vec3)
             local _status, _response = pcall(function()
-                return atmosphere.getWindWithTurbulence(_vec3);
+                return DCS.proxy["atmosphere"].getWindWithTurbulence(_vec3);
             end)
             if _status then
                 return _response;
@@ -233,7 +233,7 @@ DCS = {
 
         getTemperatureAndPressure = function(_vec3)
             local _status, _response = pcall(function()
-                return atmosphere.getTemperatureAndPressure(_vec3);
+                return DCS.proxy["atmosphere"].getTemperatureAndPressure(_vec3);
             end)
             if _status then
                 return _response;
@@ -1116,7 +1116,7 @@ DCS = {
 
         getCode = function(_spot)
             local _status, _response = pcall(function()
-                return DCS.proxy["Spot"].getCode(_spot);
+                return _spot:getCode(_spot);
             end)
             if _status then
                 return _response;
@@ -1751,7 +1751,7 @@ DCS = {
                 return nil;
             end
         end,
-    } -- TODO world not started
+    }
 }
 
 return true;
