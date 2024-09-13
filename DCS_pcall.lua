@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 -- Original Idea from OfficialyInsane with some help from OzDeaDMeaT
 
 DCS = {
@@ -5,8 +6,24 @@ DCS = {
     setErrorMessageBoxEnabled = false,
 
     proxy = {
+        ["Airbase"] = Airbase,
+        ["atmosphere"] = atmosphere,
+        ["coalition"] = coalition,
         ["Controller"] = Controller,
-        ["Spot"] = Spot
+        ["coord"] = coord,
+        ["Group"] = Group,
+        ["land"] = land,
+        ["missionCommands"] = missionCommands,
+        ["net"] = net,
+        ["Object"] = Object,
+        ["ScenaryObject"] = ScenaryObject,
+        ["Spot"] = Spot,
+        ["timer"] = timer,
+        ["trigger"] = trigger,
+        ["Unit"] = Unit,
+        ["VoiceChat"] = VoiceChat,
+        ["Warehouse"] = Warehouse,
+        ["world"] = world,
     },
 
     -- TODO Need log function
@@ -17,9 +34,327 @@ DCS = {
     tableToString = function(_table)
     end,
 
-    Airbase = {}, -- TODO Airbase not started
+    Airbase = {
+        getCallsign = function(_airbase)
+            local _status, _response = pcall(function()
+                return _airbase:getCallsign();
+            end)
+         if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
 
-    atmosphere = {}, -- TODO atmosphere not started
+        getCountry = DCS.Object.getCountry,
+
+        getUnit = function(_airbase,_UnitIndex)
+            local _status, _response = pcall(function()
+                return _airbase:getUnit(_UnitIndex or 1);
+            end)
+         if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getID = function(_airbase)
+            local _status, _response = pcall(function()
+                return _airbase:getID();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getCategoryEx = function(_airbase)
+            local _status, _response = pcall(function()
+                return _airbase:getCategoryEx();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getParking = function(_airbase,_available)
+            local _status, _response = pcall(function()
+                return _airbase:getParking(_available or true);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getRunways = function(_airbase)
+            local _status, _response = pcall(function()
+                return _airbase:getRunways();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getTechObjectPos = function(_airbase,_ObjectType)
+            local _status, _response = pcall(function()
+                return _airbase:getTechObjectPos(_ObjectType or "towers");
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getDispatcherTowerPos = function(_airbase)
+            local _status, _response = pcall(function()
+                return _airbase:getDispatcherTowerPos();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getRadioSilentMode = function(_airbase)
+            local _status, _response = pcall(function()
+                return _airbase:getRadioSilentMode();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        setRadioSilentMode = function(_airbase,_silent)
+            local _status, _response = pcall(function()
+                return _airbase:setRadioSilentMode(_silent or false);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        autoCapture = function(_airbase,_setting)
+            local _status, _response = pcall(function()
+                return _airbase:autoCapture(_setting or true);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        autoCaptureIsOn = function(_airbase)
+            local _status, _response = pcall(function()
+                return _airbase:autoCaptureIsOn();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        setCoalition = function(_airbase, _coalition)
+            local _status, _response = pcall(function()
+                return _airbase:setCoalition(_coalition or coalition.side.NEUTRAL);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getWarehouse = function(_airbase)
+            local _status, _response = pcall(function()
+                return _airbase:getWarehouse();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end
+    },
+
+    atmosphere = {
+        getWind = function(_vec3)
+            local _status, _response = pcall(function()
+                return DCS.proxy["atmosphere"].getWind(_vec3);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getWindWithTurbulence = function(_vec3)
+            local _status, _response = pcall(function()
+                return DCS.proxy["atmosphere"].getWindWithTurbulence(_vec3);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getTemperatureAndPressure = function(_vec3)
+            local _status, _response = pcall(function()
+                return DCS.proxy["atmosphere"].getTemperatureAndPressure(_vec3);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end
+    },
+
+    coalition = {
+        addGroup = function(_countryid, _groupcategory,_groupdata)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].addGroup(_countryid, _groupcategory,_groupdata);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        addStaticObject = function(_countryid,_groupdata)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].addStaticObject(_countryid,_groupdata);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        getGroups = function(_coalitionid, _groupcategory)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].getGroups(_coalitionid, _groupcategory);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        getStaticObjects = function(_coalitionid)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].getStaticObjects(_coalitionid);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        getAirbases = function(_coalitionid)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].getAirbases(_coalitionid);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        getPlayers = function(_coalitionid)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].getPlayers(_coalitionid);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        getServiceProviders = function(_coalitionid,_serviceprovider)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].getServiceProviders(_coalitionid,_serviceprovider);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        addRefPoints = function(_coalitionid,_refpoint)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].addRefPoints(_coalitionid,_refpoint);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        getRefPoints = function(_coalitionid)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].addRefPoints(_coalitionid);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        getMainRefPoint = function(_coalitionid)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].getMainRefPoint(_coalitionid);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        getCountryCoalition = function(_countryid)
+            local _status, _ = pcall(function()
+                DCS.proxy["coalition"].getCountryCoalition(_countryid);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end
+    },
 
     Controller = {
         setTask = function(_controller, _task)
@@ -161,7 +496,49 @@ DCS = {
         end
     },
 
-    coord = {}, -- TODO coord not started
+    coord = {
+        LLtoLO = function(_latitude, _longitude ,_altitude)
+            local _status, _ = pcall(function()
+                DCS.proxy["coord"].LLtoLO(_latitude, _longitude ,_altitude);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        LOtoLL = function(_vec3)
+            local _status, _ = pcall(function()
+                DCS.proxy["coord"].LOtoLL(_vec3);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        LLtoMGRS = function(_latitude, _longitude)
+            local _status, _ = pcall(function()
+                DCS.proxy["coord"].LLtoMGRS(_latitude, _longitude);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+        MGRStoLL = function(_mgrs)
+            local _status, _ = pcall(function()
+                DCS.proxy["coord"].MGRStoLL(_mgrs);
+            end)
+            if not _status then
+                -- TODO Need debug logging added here
+            end
+            return nil;
+        end,
+
+
+    },
 
     Group = {
         isExist = function(_group)
@@ -194,6 +571,18 @@ DCS = {
                 -- TODO Need debug logging added here
             end
             return nil;
+        end,
+
+        getByName = function(_name)
+            local _status, _response = pcall(function()
+                return DCS.proxy["Group"].getByName(_name);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
         end,
 
         getCategory = function(_group)
@@ -298,11 +687,361 @@ DCS = {
         end
     },
 
-    land = {}, -- TODO land not started
+    land = {
+        getHeight = function(_vec2)
+            local _status, _response = pcall(function()
+                return DCS.proxy["land"].getHeight(_vec2);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
 
-    missionCommands = {}, -- TODO missionCommands not started
+        getSurfaceHeightWithSeabed = function(_vec2)
+            local _status, _response = pcall(function()
+                return DCS.proxy["land"].getSurfaceHeightWithSeabed(_vec2);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getSurfaceType = function(_vec2)
+            local _status, _response = pcall(function()
+                return DCS.proxy["land"].getSurfaceType(_vec2);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        isVisible = function(_origin, _destination)
+            local _status, _response = pcall(function()
+                return DCS.proxy["land"].isVisible(_origin, _destination);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getIP = function(_origin, _direction, _distance)
+            local _status, _response = pcall(function()
+                return DCS.proxy["land"].getIP(_origin, _direction, _distance);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        profile = function(_vec3_1, _vec3_2)
+            local _status, _response = pcall(function()
+                return DCS.proxy["land"].profile(_vec3_1,_vec3_2);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getClosestPointOnRoads = function(_roadtype, _xcoord,_ycoord)
+            local _status, _response = pcall(function()
+                return DCS.proxy["land"].getClosestPointOnRoads(_roadtype, _xcoord,_ycoord);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        findPathOnRoads = function(_roadtype, _xcoord,_ycoord, _xdest, _ydest)
+            local _status, _response = pcall(function()
+                return DCS.proxy["land"].findPathOnRoads(_roadtype, _xcoord,_ycoord, _xdest, _ydest);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+    },
+
+    missionCommands = {
+        addCommand = function(_name, _path, _functiontorun, _arguments)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].addCommand(_name, _path, _functiontorun, _arguments);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        addSubMenu = function(_name, _path)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].addSubMenu(_name, _path);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        removeItem = function( _path)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].removeItem(_path);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        addCommandForCoalition = function(_coalition, _name, _path, _functiontorun, _arguments)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].addCommandForCoalition(_coalition, _name, _path, _functiontorun, _arguments);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        addSubMenuForCoalition = function(_coalition, _name, _path)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].addSubMenuForCoalition(_coalition, _name, _path);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        removeItemForCoalition = function(_coalition, _path)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].removeItemForCoalition(_coalition, _path);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        addCommandForGroup = function(_groupId, _name, _path, _functiontorun, _arguments)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].addCommandForGroup(_groupId, _name, _path, _functiontorun, _arguments);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        addSubMenuForGroup = function(_groupId, _name, _path)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].addSubMenuForGroup(_groupId, _name, _path);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        removeItemForGroup = function(_groupId, _path)
+            local _status, _response = pcall(function()
+                return DCS.proxy["missionCommands"].removeItemForGroup(_groupId, _path);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end
+    },
 
     net = {}, -- TODO net not started
+
+    Object = {
+        isExist = function(_object)
+            local _status, _response = pcall(function()
+                return _object:isExist();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        destroy = function(_object)
+            local _status, _response = pcall(function()
+                return _object:destroy();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getCategory = function(_object)
+            local _status, _response = pcall(function()
+                return _object:getCategory();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getCountry = function(_object)
+            local _status, _response = pcall(function()
+                return _object:getCountry();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getTypeName = function(_object)
+            local _status, _response = pcall(function()
+                return _object:getTypeName();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getDesc = function(_object)
+            local _status, _response = pcall(function()
+                return _object:getDesc();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        hasAttribute = function(_object, _attribute)
+            local _status, _response = pcall(function()
+                return _object:hasAttribute(_attribute);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getName = function(_object)
+            local _status, _response = pcall(function()
+                return _object:getName();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getPoint = function(_object)
+            local _status, _response = pcall(function()
+                return _object:getPoint();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getPosition = function(_object)
+            local _status, _response = pcall(function()
+                return _object:getPosition();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getVelocity = function(_object)
+            local _status, _response = pcall(function()
+                return _object:getVelocity();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        inAir = function(_object)
+            local _status, _response = pcall(function()
+                return _object:inAir();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end
+    },
 
     ScenaryObject = {}, -- TODO ScenaryObject not started
 
@@ -377,7 +1116,7 @@ DCS = {
 
         getCode = function(_spot)
             local _status, _response = pcall(function()
-                return DCS.proxy["Spot"].getCode(_spot);
+                return _spot:getCode(_spot);
             end)
             if _status then
                 return _response;
@@ -398,12 +1137,164 @@ DCS = {
         end
     },
 
+    StaticObject = {
+        isExist = DCS.Object.isExist,
+
+        getCountry = DCS.Object.getCountry,
+
+        getCoalition =  function(_staticObject)
+            local _status, _response = pcall(function()
+                return DCS.proxy["StaticObject"].getCoalition(_name);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getCargoDisplayName = function(_staticObject)
+            local _status, _response = pcall(function()
+                return _staticObject:getCargoDisplayName();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getDrawArgumentValue = function(_drawargumentvalue)
+            local _status, _response = pcall(function()
+                return DCS.proxy["StaticObject"].getDrawArgumentValue(_drawargumentvalue);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getByName = function(_name)
+            local _status, _response = pcall(function()
+                return DCS.proxy["StaticObject"].getByName(_name);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getDescByName = function(_type)
+            local _status, _response = pcall(function()
+                return DCS.proxy["StaticObject"].getDescByName(_type);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+    },
+
+    timer = {
+        getTime = function()
+            local _status, _response = pcall(function()
+                return DCS.proxy["timer"].getTime();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getAbsTime = function()
+            local _status, _response = pcall(function()
+                return DCS.proxy["timer"].getAbsTime();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getTime0 = function()
+            local _status, _response = pcall(function()
+                return DCS.proxy["timer"].getTime0();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        scheduleFunction = function(_function,_functionarguments,_modeltime)
+            local _status, _response = pcall(function()
+                return DCS.proxy["timer"].scheduleFunction(_function,_functionarguments,_modeltime);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        removeFunction = function(_functionid)
+            local _status, _response = pcall(function()
+                return DCS.proxy["timer"].removeFunction(_functionid);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        setFunctionTime = function(_functionid,_modeltime)
+            local _status, _response = pcall(function()
+                return DCS.proxy["timer"].setFunctionTime(_functionid,_modeltime);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end
+    },
+
     trigger = {}, -- TODO trigger not started
 
     Unit = {
         isActive = function(_unit)
             local _status, _response = pcall(function()
                 return _unit:isActive();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getByName = function(_name)
+            local _status, _response = pcall(function()
+                return DCS.proxy["Unit"].getByName(_name);
             end)
             if _status then
                 return _response;
@@ -616,8 +1507,251 @@ DCS = {
         end
     },
 
-    Warehouse = {}, -- TODO Warehouse not started
-    world = {} -- TODO world not started
+    VoiceChat = {
+            createRoom = function(_roomname,_side,_roomtype)
+            local _status, _response = pcall(function()
+                return DCS.proxy["VoiceChat"].createRoom(_roomname,_side,_roomtype);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+    },
+
+    Warehouse = {
+            addItem = function(_warehouse,_itemtype,_quantity)
+            local _status, _response = pcall(function()
+                return _warehouse:addItem(_itemtype,_quantity);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getItemCount = function(_warehouse,_itemtype)
+            local _status, _response = pcall(function()
+                return _warehouse:getItemCount(_itemtype);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        setItem = function(_warehouse,_itemtype,_quantity)
+            local _status, _response = pcall(function()
+                return _warehouse:setItem(_itemtype,_quantity);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        addLiquid = function(_warehouse,_liquidtype,_quantity)
+            local _status, _response = pcall(function()
+                return _warehouse:addLiquid(_liquidtype,_quantity);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getLiquidAmount = function(_warehouse,_liquidtype)
+            local _status, _response = pcall(function()
+                return _warehouse:getLiquidAmount(_liquidtype);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        setLiquidAmount = function(_warehouse,_liquidtype,_quantity)
+            local _status, _response = pcall(function()
+                return _warehouse:setItem(_liquidtype,_quantity);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        removeLiquid = function(_warehouse,_liquidtype,_quantity)
+            local _status, _response = pcall(function()
+                return _warehouse:removeLiquid(_liquidtype,_quantity);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getOwner = function(_warehouse)
+            local _status, _response = pcall(function()
+                return _warehouse:getOwner();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getInventory = function(_warehouse,_itemtype)
+            local _status, _response = pcall(function()
+                return _warehouse:getInventory(_itemtype);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getByName = function(_name)
+            local _status, _response = pcall(function()
+                return DCS.proxy["Warehouse"].getByName(_name);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getResourceMap = function(_warehouse)
+            local _status, _response = pcall(function()
+                return _warehouse:getResourceMap();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+        getCargoAsWarehouse = function(_staticObject)
+            local _status, _response = pcall(function()
+                return DCS.proxy["Warehouse"].getCargoAsWarehouse(_staticObject);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end
+    },
+
+    world = {
+        addEventHandler = function(_handler)
+            local _status, _response = pcall(function()
+                return DCS.proxy["world"].addEventHandler(_handler);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        removeEventHandler = function(_handler)
+            local _status, _response = pcall(function()
+                return DCS.proxy["world"].removeEventHandler(_handler);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getPlayer = function()
+            local _status, _response = pcall(function()
+                return DCS.proxy["world"].getPlayer();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getAirbases = function()
+            local _status, _response = pcall(function()
+                return DCS.proxy["world"].getAirbases();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        searchObjects = function(_objectcategory,_searchvolume,_objectsearchhandler)
+            local _status, _response = pcall(function()
+                return DCS.proxy["world"].searchObjects(_objectcategory,_searchvolume,_objectsearchhandler);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        getMarkPanels = function()
+            local _status, _response = pcall(function()
+                return DCS.proxy["world"].getMarkPanels();
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+
+        removeJunk = function(_searchvolume)
+            local _status, _response = pcall(function()
+                return DCS.proxy["world"].removeJunk(_searchvolume);
+            end)
+            if _status then
+                return _response;
+            else
+                -- TODO Need logging added here
+                return nil;
+            end
+        end,
+    }
 }
 
 return true;
