@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-global
 -- Original Idea from OfficialyInsane with some help from OzDeaDMeaT
 
--- TODO: Needs to import LOGGER to work.
+-- TODO: Needs to import LOGGER and WRAPPER to work.
 -- Options (all have drawbacks):
 --   - _G.loadfile()
 --   - require()
@@ -37,17 +37,13 @@ DCS = {
         return _error;
     end,
 
-    -- TODO Need tableToString function
-    tableToString = function(_table)
-    end,
-
     Airbase = {
         getCallsign = function(_airbase)
             local _status, _response = xpcall(function()
-                return _airbase:getCallsign();
+                return WRAPPER.unwrap(_airbase):getCallsign();
             end, DCS.errorHandler);
          if _status then
-                return _response;
+                return WRAPPER.wrap(_response, DCS.Airbase);
             else
                 DCS.log.error("Failed to getCallsign for an airbase!", _airbase, _response);
                 return nil;
@@ -899,10 +895,10 @@ DCS = {
     Object = {
         isExist = function(_object)
             local _status, _response = xpcall(function()
-                return _object:isExist();
+                return WRAPPER.unwrap(_object):isExist();
             end, DCS.errorHandler);
             if _status then
-                return _response;
+                return WRAPPER.wrap(_response, DCS.Object);
             else
                 DCS.log.error("Failed to isExist for an object!", _object, _response);
                 return nil;

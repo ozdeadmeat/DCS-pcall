@@ -1,5 +1,5 @@
 Wrapper = {
-    wrap = function(_object)
+    wrap = function(_object, _type)
         local _wrapped = {
             _source = _object
         };
@@ -7,9 +7,7 @@ Wrapper = {
             if type(_value) ~= "function" then
                 _wrapped[_key] = _object[_value];
             else
-                -- TODO: STOP_POINT -
-                -- Need to replace the functions in _object with those from DCS pcall Wrapper
-                -- How do we determine the correct function? Check all args match type (but not name) and method name matches?
+                _wrapped[_key] = _type[_value];
             end
         end
     end,
@@ -29,7 +27,7 @@ Wrapper = {
 --[[ example usage:
 
 local unit = Unit.getByName("CVN75");
-local wrappedUnit = Wrapper.wrap(unit);
-wrappedUnit:getID(); -- must call the wrapper, not the original function
+local wrappedUnit = Wrapper.wrap(unit, DCS.Unit);
+wrappedUnit:getID(); -- call the wrapper, not the original function
 
 ]]
